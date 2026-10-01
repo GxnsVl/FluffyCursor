@@ -2,36 +2,36 @@
 
 Animated caret for JetBrains IDEs: responsive movement, directional stretching, subtle glow, and a single forward/back landing recoil. Typing uses a faster, lighter effect. Ghost copies are disabled by default.
 
-## Скачать и установить
+## Download and install
 
-1. Скачайте **[fluffy-cursor-1.1.0.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/v1.1.0/fluffy-cursor-1.1.0.zip)** со страницы [Releases](https://github.com/GxnsVl/FluffyCursor/releases).
-2. В IntelliJ IDEA откройте **Settings → Plugins → ⚙ → Install Plugin from Disk…**.
-3. Выберите ZIP **без распаковки** и перезапустите IDE.
-4. Откройте **Settings → Tools → Fluffy Cursor**, выберите **Neon** и нажмите **Apply** для яркого свечения и выразительных переходов.
+1. Download **[fluffy-cursor-1.1.0.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/v1.1.0/fluffy-cursor-1.1.0.zip)** from the [Releases](https://github.com/GxnsVl/FluffyCursor/releases) page. Choose the plugin ZIP, not the Source code archive.
+2. In IntelliJ IDEA, open **Settings → Plugins → ⚙ → Install Plugin from Disk…**.
+3. Select the ZIP **without extracting it**, then restart your IDE.
+4. Open **Settings → Tools → Fluffy Cursor**, choose **Neon**, and click **Apply** for a brighter glow and more pronounced movement.
 
-Один ZIP используется на **Windows, Linux (включая CachyOS) и macOS**. Отдельный системный пакет не нужен. Поддерживаемые версии платформы: **2024.3–2026.1**, сборки **243–261**. Плагин содержит JVM-код и не включает нативные библиотеки. Запуск на Linux/macOS пока не проверен вручную.
+The same ZIP works as an installation package for **Windows, Linux (including CachyOS), and macOS**. No separate system package is needed. Supported platform versions: **2024.3–2026.1**, builds **243–261**. The plugin contains JVM code and no bundled native libraries. Linux/macOS runtime behavior has not yet been manually tested.
 
-[Официальная инструкция JetBrains по установке ZIP](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk).
+[Official JetBrains instructions for installing a plugin ZIP](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk).
 
-### Настройка цвета
+### Change the color
 
-На вкладке **General** снимите **Use theme caret color**, укажите **Custom caret color (#RRGGBB)** и нажмите **Apply**. Например: `#00E5FF` — голубой, `#B388FF` — фиолетовый, `#FF4081` — розовый. На вкладке **Trail and glow** опция **Glow uses cursor color** связывает цвет свечения с кареткой.
+On the **General** tab, disable **Use theme caret color**, enter a value in **Custom caret color (#RRGGBB)**, and click **Apply**. Examples: `#00E5FF` for cyan, `#B388FF` for purple, or `#FF4081` for pink. On the **Trail and glow** tab, enable **Glow uses cursor color** to match the glow to the caret.
 
-### Обновление со Smooth Caret
+### Upgrade from Smooth Caret
 
-Плагин переименован в Fluffy Cursor. Внутренний ID сохранён, поэтому он обновляет старую версию без установки второй копии. Настройки цвета сохраняются. При загрузке прежних настроек отключаются копии следа и обновляются старые стандартные параметры пружины.
+Smooth Caret has been renamed to Fluffy Cursor. Its internal plugin ID is unchanged, so installing this release updates the existing plugin without creating a second copy. Your color settings are preserved. Loading older settings disables ghost copies and upgrades the previous default spring tuning.
 
-## Поведение
+## Behavior
 
-- Тонкая каретка 2 px в покое; при прыжке она немного расширяется и растягивается по направлению движения.
-- Один небольшой перелёт вперёд, меньший возврат назад и остановка.
-- При печати: ускоренная анимация, ограничение движения 70 ms и четверть силы деформации.
-- Плавность рассчитывается по реальному времени; таймер запрашивает обновления каждые 5 ms во время анимации.
-- Нативная каретка скрывается, пока активна пользовательская; её прежнее состояние восстанавливается при отключении.
-- Частицы, ripple и landing pulse выключены. Копии следа выключены по умолчанию.
-- Таймер останавливается после завершения эффекта; перерисовываются только затронутые области.
+- A thin 2 px caret at rest; it widens slightly and stretches along the direction of a jump.
+- One small forward overshoot, a smaller backward return, then a stop.
+- Faster animation while typing: movement capped at 70 ms with quarter-strength deformation.
+- Animation follows elapsed time, with updates requested every 5 ms while active.
+- The native caret is hidden while the custom caret is active; its previous state is restored when disabled.
+- Particles, ripple, and landing pulse are disabled. Ghost copies are disabled by default.
+- The timer stops when effects finish; only affected regions are repainted.
 
-Фактическая частота кадров зависит от нагрузки IDE, JVM и оконного композитора; 200 FPS не гарантируются.
+Actual frame rate depends on IDE load, the JVM, and the window compositor; 200 FPS is not guaranteed.
 
 ## Build from source
 
