@@ -1,0 +1,13 @@
+<idea-plugin>
+  <id>smooth.caret</id>
+  <name>Fluffy Cursor</name>
+  <vendor>Fluffy Cursor contributors</vendor>
+  <description><![CDATA[Smooth and spring animated editor caret with configurable styles, subtle glow, trails and presets. Uses common IntelliJ Platform editor APIs and keeps the native caret available.]]></description>
+  <depends>com.intellij.modules.platform</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.example.smoothcaret.settings.SmoothCaretSettings"/>
+    <applicationService serviceImplementation="com.example.smoothcaret.editor.EditorTracker"/>
+    <applicationConfigurable parentId="tools" id="smooth.caret.settings" displayName="Fluffy Cursor" instance="com.example.smoothcaret.settings.SmoothCaretConfigurable"/>
+    <postStartupActivity implementation="com.example.smoothcaret.plugin.SmoothCaretPlugin"/>
+  </extensions>
+</idea-plugin>
