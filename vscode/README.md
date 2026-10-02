@@ -4,8 +4,8 @@ A desktop VS Code edition of Fluffy Cursor: a thin caret at rest, directional st
 
 ## Install
 
-1. Download **[fluffy-cursor-1.0.0.vsix](https://github.com/GxnsVl/FluffyCursor/releases/download/vscode-v1.0.0/fluffy-cursor-1.0.0.vsix)**. The JetBrains `.zip` is a separate plugin and cannot be installed in VS Code.
-2. In VS Code, open **Extensions → ⋯ → Install from VSIX…**, select the file, and reload if prompted. Alternatively: `code --install-extension fluffy-cursor-1.0.0.vsix`.
+1. Download **[fluffy-cursor-1.0.1.vsix](https://github.com/GxnsVl/FluffyCursor/releases/download/vscode-v1.0.1/fluffy-cursor-1.0.1.vsix)**. The JetBrains `.zip` is a separate plugin and cannot be installed in VS Code.
+2. In VS Code, open **Extensions → ⋯ → Install from VSIX…**, select the file, and reload if prompted. Alternatively: `code --install-extension fluffy-cursor-1.0.1.vsix`.
 3. Disable any existing custom cursor scripts (Neovide, Jelly Cursor, etc.) using their original extension. Fluffy Cursor refuses to install over recognized conflicting renderers.
 4. Open the Command Palette (**Ctrl+Shift+P**, or **Cmd+Shift+P** on macOS), run **Fluffy Cursor: Install / Update Full Effect**, then choose **Reload Window**.
 
@@ -37,7 +37,7 @@ Run **Fluffy Cursor: Open Settings** or search Settings for `Fluffy Cursor`. Aft
 
 The rendering loop uses `requestAnimationFrame` and elapsed-time physics, so it follows the display's refresh rate rather than a fixed 60 Hz timer. It stops scheduling frames after movement settles. Actual frame rate depends on VS Code, the compositor, and system load.
 
-The native caret is hidden only while a focused editor has a valid replacement overlay. It is restored on focus loss. Split editors and up to 100 simultaneous carets are supported; larger multicursor selections retain native rendering. Scrolling, editor switches, font-size changes, and very large jumps snap without long streaks. The terminal and browser-based VS Code are outside this extension's scope.
+The native caret is hidden only while a focused editor has a valid replacement overlay. It is restored on focus loss. Split editors and up to 100 simultaneous carets are supported. Multiple carets and selection-count changes snap directly to their actual positions without stretch or recoil, avoiding crossing trails when Monaco reuses cursor nodes. Single-caret motion retains the full effect; larger multicursor selections retain native rendering. Scrolling, editor switches, font-size changes, and very large jumps snap without long streaks. The terminal and browser-based VS Code are outside this extension's scope.
 
 ## Remove or recover
 

@@ -2,7 +2,7 @@
   "name": "fluffy-cursor",
   "displayName": "Fluffy Cursor",
   "description": "Directional elastic caret, subtle neon glow and a single landing recoil for desktop VS Code.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "GxnsVl",
   "license": "MIT",
   "engines": {

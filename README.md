@@ -6,7 +6,7 @@ Animated caret for JetBrains IDEs: responsive movement, directional stretching, 
 
 ## Install in VS Code
 
-1. Download **[fluffy-cursor-1.0.0.vsix](https://github.com/GxnsVl/FluffyCursor/releases/download/vscode-v1.0.0/fluffy-cursor-1.0.0.vsix)**. Use the `.vsix` package for VS Code.
+1. Download **[fluffy-cursor-1.0.1.vsix](https://github.com/GxnsVl/FluffyCursor/releases/download/vscode-v1.0.1/fluffy-cursor-1.0.1.vsix)**. Use the `.vsix` package for VS Code.
 2. Open **Extensions** (**Ctrl+Shift+X**, or **Cmd+Shift+X** on macOS), click **⋯ → Install from VSIX…**, and select the downloaded file.
 3. Disable existing custom cursor effects such as **Neovide** or **Jelly Cursor** using the extension that installed them, then reload VS Code. Fluffy Cursor detects recognized conflicting effects and refuses to stack another renderer on top.
 4. Open the Command Palette (**Ctrl+Shift+P**, or **Cmd+Shift+P** on macOS), run **Fluffy Cursor: Install / Update Full Effect**, and choose **Reload Window**.
@@ -15,7 +15,7 @@ Animated caret for JetBrains IDEs: responsive movement, directional stretching, 
 You can also install the package from a terminal:
 
 ```sh
-code --install-extension fluffy-cursor-1.0.0.vsix
+code --install-extension fluffy-cursor-1.0.1.vsix
 ```
 
 Then complete steps 3–4 to enable the full effect. Installing the VSIX alone registers the extension's commands and settings.

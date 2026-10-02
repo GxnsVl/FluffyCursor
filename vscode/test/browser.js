@@ -65,6 +65,19 @@ async function main() {
     });
     await advance(3);
     assert.equal(await page.locator('#fluffy-cursor-overlay > g > g').count(), 2);
+    await page.locator('.cursors-layer').evaluate(el => {
+      const cursors = el.querySelectorAll('.cursor');
+      cursors[0].style.left = '120px'; cursors[0].style.top = '40px';
+      cursors[1].style.left = '440px'; cursors[1].style.top = '260px';
+    });
+    await advance(3);
+    assert.equal(await page.evaluate(() => window.frames.size), 0, 'multicarets snap without crossing trails');
+    const multiPaths = await page.locator('#fluffy-cursor-overlay > g > g > path:last-child').evaluateAll(nodes => nodes.map(node => node.getAttribute('d')));
+    assert.match(multiPaths[0], /^M200\.000,100\.000L202\.000,100\.000/);
+    assert.match(multiPaths[1], /^M520\.000,320\.000L522\.000,320\.000/);
+    await page.locator('.cursors-layer').evaluate(el => el.lastElementChild.remove());
+    await advance(3);
+    assert.equal(await page.evaluate(() => window.frames.size), 0, 'merging back to one caret clears old deformation');
     await page.evaluate(() => {
       const input = document.createElement('div'); input.className = 'native-edit-context'; input.tabIndex = 0;
       document.querySelector('.overflow-guard').appendChild(input); input.focus();

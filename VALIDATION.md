@@ -37,3 +37,5 @@ Validated on Windows, 2026-10-02. The VSIX is a separate artifact from the JetBr
 - `vsce package --no-dependencies` produced `vscode/fluffy-cursor-1.0.0.vsix`. It contains only the extension manifest, guide/license, and four small JavaScript files; no SDKs, test tools, or native dependencies are bundled.
 - The full effect was not installed into the user's existing VS Code. That workbench already contains Neovide and Jelly Cursor scripts; the installer detects this conflict instead of stacking another cursor renderer.
 - Manual visual behavior in desktop VS Code, actual monitor refresh rate, and Linux/macOS runtime behavior remain untested. Full effects depend on internal workbench markup, require a writable installation, and may trigger VS Code's integrity warning. Reinstallation after IDE updates may be necessary.
+
+VS Code 1.0.1: multicarets and selection-count transitions now snap without stretch/recoil, preventing reused Monaco cursor nodes from generating crossing trails. Browser regression checks cover diverging positions and merging back to one caret.

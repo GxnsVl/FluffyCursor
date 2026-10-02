@@ -7,6 +7,7 @@
   const NS = 'http://www.w3.org/2000/svg', HIDDEN = 'fluffy-cursor-native-hidden';
   let editor = null, states = new Map(), frame = 0, previousTime = 0;
   let lastTyping = -Infinity, windowFocused = true, snapNext = false, disposed = false;
+  let previousCount = 0;
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('id', 'fluffy-cursor-overlay');
   svg.setAttribute('aria-hidden', 'true');
@@ -28,7 +29,7 @@
   function clear() {
     if (editor) editor.classList.remove(HIDDEN);
     editor = null; states.clear(); layer.replaceChildren(); observer.disconnect();
-    previousTime = 0;
+    previousTime = 0; previousCount = 0;
   }
   function focusedEditor() {
     if (!windowFocused || document.hidden) return null;
@@ -84,6 +85,10 @@
   function draw(now) {
     frame = 0;
     const targets = capture(), live = new Set(targets.map(target => target.node));
+    // Monaco reuses/reorders cursor nodes as selections multiply or merge.
+    // Snap multicarets and count transitions instead of animating unrelated identities.
+    snapNext ||= targets.length > 1 || targets.length !== previousCount;
+    previousCount = targets.length;
     for (const [node, s] of states) if (!live.has(node)) { s.group.remove(); states.delete(node); }
     const seconds = Math.min(0.032, Math.max(0, (now - (previousTime || now)) / 1000));
     previousTime = now;
