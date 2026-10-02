@@ -1,4 +1,4 @@
-# Validation — Fluffy Cursor 1.1.0
+# Validation — Fluffy Cursor 1.1.1
 
 Validated on Windows, 2026-10-02.
 
@@ -17,10 +17,12 @@ No quantitative FPS/CPU benchmark was performed; these changes reduce identified
 
 ## Compatibility
 
-- Declared platform builds: 243–261 (2024.3–2026.1).
+- Declared platform builds: 243–262 (2024.3–2026.2).
 - The artifact contains JVM JARs, with no bundled platform-specific binaries.
-- Previous API verification accepted the native-caret hiding API on IDEA 2024.3.6, IDEA 2026.1.4 and PyCharm 2026.1.4; this exact renamed release was not re-run through Plugin Verifier.
+- JetBrains Plugin Verifier reports **Compatible** for this exact 1.1.1 artifact on IntelliJ IDEA 2026.2.3 (IU-262.10968.63), PyCharm 2026.2.3 (PY-262.10968.92), and Rider 2026.2.3.1 (RD-262.10968.170).
+- These were the latest stable releases returned by JetBrains' product release API on 2026-10-02. The default `verifyPlugin` task pins these three targets for repeatable checks.
+- Previous API verification also accepted the native-caret hiding API on IDEA 2024.3.6, IDEA 2026.1.4 and PyCharm 2026.1.4.
 - The release has not been manually checked in a live IDE. Linux/Wayland and macOS runtime behavior remain untested.
 - Stable internal plugin ID and settings storage preserve upgrade compatibility with Smooth Caret.
 
-Artifact: `build/distributions/fluffy-cursor-1.1.0.zip`.
+Artifact: `build/distributions/fluffy-cursor-1.1.1.zip`.

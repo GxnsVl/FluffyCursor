@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.19.0"
 }
 group = "com.example.smoothcaret"
-version = "1.1.0"
+version = "1.1.1"
 repositories {
     mavenCentral()
     intellijPlatform { defaultRepositories() }
@@ -21,12 +21,16 @@ kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarg
 java { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21 }
 intellijPlatform {
     pluginConfiguration {
-        ideaVersion { sinceBuild = "243"; untilBuild = "261.*" }
+        ideaVersion { sinceBuild = "243"; untilBuild = "262.*" }
     }
     pluginVerification {
         ides {
             val verifyIde = providers.gradleProperty("verifierIdePath").orNull
-            if (verifyIde == null) recommended() else local(verifyIde)
+            if (verifyIde == null) {
+                create(org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.IntellijIdeaUltimate, "2026.2.3")
+                create(org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.PyCharmProfessional, "2026.2.3")
+                create(org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.Rider, "2026.2.3.1")
+            } else local(verifyIde)
             providers.gradleProperty("verifierPyCharmPath").orNull?.let { local(it) }
             providers.gradleProperty("verifierBaselinePath").orNull?.let { local(it) }
         }

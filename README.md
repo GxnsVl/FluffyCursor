@@ -4,12 +4,12 @@ Animated caret for JetBrains IDEs: responsive movement, directional stretching, 
 
 ## Download and install
 
-1. Download **[fluffy-cursor-1.1.0.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/v1.1.0/fluffy-cursor-1.1.0.zip)** from the [Releases](https://github.com/GxnsVl/FluffyCursor/releases) page. Choose the plugin ZIP, not the Source code archive.
-2. In IntelliJ IDEA, open **Settings → Plugins → ⚙ → Install Plugin from Disk…**.
+1. Download **[fluffy-cursor-1.1.1.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/v1.1.1/fluffy-cursor-1.1.1.zip)** from the [Releases](https://github.com/GxnsVl/FluffyCursor/releases) page. Choose the plugin ZIP, not the Source code archive.
+2. In IntelliJ IDEA, PyCharm, or Rider, open **Settings → Plugins → ⚙ → Install Plugin from Disk…**.
 3. Select the ZIP **without extracting it**, then restart your IDE.
 4. Open **Settings → Tools → Fluffy Cursor**, choose **Neon**, and click **Apply** for a brighter glow and more pronounced movement.
 
-The same ZIP works as an installation package for **Windows, Linux (including CachyOS), and macOS**. No separate system package is needed. Supported platform versions: **2024.3–2026.1**, builds **243–261**. The plugin contains JVM code and no bundled native libraries. Linux/macOS runtime behavior has not yet been manually tested.
+The same ZIP works as an installation package for **Windows, Linux (including CachyOS), and macOS**. No separate system package is needed. Supported platform versions: **2024.3–2026.2**, builds **243–262**. The plugin contains JVM code and no bundled native libraries. Linux/macOS runtime behavior has not yet been manually tested.
 
 [Official JetBrains instructions for installing a plugin ZIP](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk).
 
@@ -49,7 +49,7 @@ Windows PowerShell:
 .\gradlew.bat test buildPlugin
 ```
 
-Output: `build/distributions/fluffy-cursor-1.1.0.zip`.
+Output: `build/distributions/fluffy-cursor-1.1.1.zip`.
 The Gradle wrapper and the official IntelliJ Platform Gradle plugin are included/configured. Compilation targets JVM 21 and IntelliJ IDEA 2024.3.6.
 
 ## Validation and architecture
@@ -59,3 +59,7 @@ See [VALIDATION.md](VALIDATION.md) for build/test results and their limits, and 
 ## License
 
 [MIT](LICENSE). Unaffiliated with JetBrains, Neovide, or VS Code.
+
+## Compatibility verification
+
+Run `bash ./gradlew verifyPlugin` (or `.\gradlew.bat verifyPlugin` on Windows) to verify the plugin against IntelliJ IDEA and PyCharm 2026.2.3, and Rider 2026.2.3.1. Gradle downloads the verification IDEs on the first run. The plugin still targets JVM 21 and builds against the 2024.3.6 SDK to retain older supported IDE versions.
