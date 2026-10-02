@@ -7,3 +7,6 @@ local.properties
 
 .kotlin/
 *.log
+vscode/node_modules/
+vscode/*.vsix
+vscode/test-results/

@@ -2,6 +2,8 @@
 
 Animated caret for JetBrains IDEs: responsive movement, directional stretching, subtle glow, and a single forward/back landing recoil. Typing uses a faster, lighter effect. Ghost copies are disabled by default.
 
+**VS Code edition:** download the separate `.vsix` and follow the [VS Code installation guide](vscode/README.md). Its full effect uses an opt-in, reversible desktop workbench customization.
+
 ## Download and install
 
 1. Download **[fluffy-cursor-1.1.1.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/v1.1.1/fluffy-cursor-1.1.1.zip)** from the [Releases](https://github.com/GxnsVl/FluffyCursor/releases) page. Choose the plugin ZIP, not the Source code archive.

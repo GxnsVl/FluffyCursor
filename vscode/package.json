@@ -1,0 +1,140 @@
+{
+  "name": "fluffy-cursor",
+  "displayName": "Fluffy Cursor",
+  "description": "Directional elastic caret, subtle neon glow and a single landing recoil for desktop VS Code.",
+  "version": "1.0.0",
+  "publisher": "GxnsVl",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "cursor",
+    "caret",
+    "animation",
+    "neon",
+    "smooth"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GxnsVl/FluffyCursor.git",
+    "directory": "vscode"
+  },
+  "homepage": "https://github.com/GxnsVl/FluffyCursor/tree/main/vscode",
+  "bugs": {
+    "url": "https://github.com/GxnsVl/FluffyCursor/issues"
+  },
+  "main": "./src/extension.js",
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": true
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "test:browser": "node test/browser.js",
+    "package": "vsce package --no-dependencies"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "fluffyCursor.install",
+        "title": "Fluffy Cursor: Install / Update Full Effect"
+      },
+      {
+        "command": "fluffyCursor.uninstall",
+        "title": "Fluffy Cursor: Remove Full Effect"
+      },
+      {
+        "command": "fluffyCursor.settings",
+        "title": "Fluffy Cursor: Open Settings"
+      }
+    ],
+    "configuration": {
+      "title": "Fluffy Cursor",
+      "properties": {
+        "fluffyCursor.enabled": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "Enable rendering. Run Install / Update Full Effect and reload after changing settings."
+        },
+        "fluffyCursor.color": {
+          "type": "string",
+          "default": "#00E5FF",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "scope": "application",
+          "description": "Caret and glow color (#RRGGBB)."
+        },
+        "fluffyCursor.useThemeColor": {
+          "type": "boolean",
+          "default": false,
+          "scope": "application",
+          "description": "Use the editor's theme caret color instead of the custom color."
+        },
+        "fluffyCursor.width": {
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 6,
+          "scope": "application",
+          "description": "Resting caret width in logical pixels."
+        },
+        "fluffyCursor.stiffness": {
+          "type": "number",
+          "default": 0.3,
+          "minimum": 0.05,
+          "maximum": 0.8,
+          "scope": "application",
+          "description": "Spring stiffness. Higher values produce quicker movement."
+        },
+        "fluffyCursor.damping": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0.3,
+          "maximum": 0.95,
+          "scope": "application",
+          "description": "Spring velocity retention."
+        },
+        "fluffyCursor.stretch": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1.5,
+          "scope": "application",
+          "description": "Directional stretching strength. Typing uses one quarter of this value."
+        },
+        "fluffyCursor.glow": {
+          "type": "number",
+          "default": 0.35,
+          "minimum": 0,
+          "maximum": 0.8,
+          "scope": "application",
+          "description": "Subtle neon glow opacity."
+        },
+        "fluffyCursor.landingInertia": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "One small forward/back recoil at the end of a movement."
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^4.0.0",
+    "playwright": "^1.63.0"
+  }
+}
