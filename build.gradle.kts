@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.19.0"
 }
 group = "com.example.smoothcaret"
-version = "1.1.1"
+version = "1.2.0"
 repositories {
     mavenCentral()
     intellijPlatform { defaultRepositories() }

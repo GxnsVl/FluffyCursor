@@ -16,8 +16,10 @@ async function fixture(t) {
 test('install is idempotent and removal restores original HTML byte-for-byte', async t => {
   const { html, directory } = await fixture(t);
   await patcher.install(html, ROOT, { color: '#FF00FF' });
+  const firstInstall = await fs.readFile(html, 'utf8');
   await patcher.install(html, ROOT, { width: 3 });
   const changed = await fs.readFile(html, 'utf8');
+  assert.notEqual(changed, firstInstall, 'renderer URL changes so reloading cannot reuse stale settings');
   assert.equal(changed.split(patcher.START).length, 2);
   assert.match(await fs.readFile(path.join(directory, 'fluffy-cursor.js'), 'utf8'), /"width":3/);
   assert.equal(await patcher.uninstall(html), true);

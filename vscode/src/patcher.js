@@ -15,14 +15,15 @@ function strip(html) {
   }
   return html.slice(0, start) + html.slice(end + END.length);
 }
-function patch(html) {
+function patch(html, revision = '') {
+  if (revision && !/^[\da-f]+$/i.test(revision)) throw new Error('Invalid renderer revision.');
   const clean = strip(html);
   if (/neovide-cursor|jelly-cursor|editor-cursor-animation/i.test(clean)) {
     throw new Error('Another custom cursor effect (Neovide/Jelly Cursor) is already installed. Disable or remove that effect using its original extension, reload VS Code, then run this command again.');
   }
   const closing = clean.lastIndexOf('</html>');
   if (closing < 0 || !/workbench[^"']*\.js/.test(clean)) throw new Error('Unrecognized VS Code workbench HTML. No files were changed.');
-  return clean.slice(0, closing) + START + '<script src="./' + SCRIPT + '"></script>' + END + clean.slice(closing);
+  return clean.slice(0, closing) + START + '<script src="./' + SCRIPT + (revision ? '?v=' + revision : '') + '"></script>' + END + clean.slice(closing);
 }
 function hash(content) { return crypto.createHash('sha256').update(content).digest('hex'); }
 function validateBackup(backup) {
@@ -44,7 +45,7 @@ async function locate(appRoot) {
   throw new Error('Desktop VS Code workbench was not found. Browser-based VS Code is not supported.');
 }
 async function install(htmlFile, extensionRoot, input) {
-  const html = await fs.readFile(htmlFile, 'utf8'), clean = strip(html), patched = patch(html);
+  const html = await fs.readFile(htmlFile, 'utf8'), clean = strip(html), patched = patch(html, crypto.randomBytes(8).toString('hex'));
   const directory = path.dirname(htmlFile), backupFile = path.join(directory, BACKUP), scriptFile = path.join(directory, SCRIPT);
   let backup;
   try { backup = JSON.parse(await fs.readFile(backupFile, 'utf8')); }

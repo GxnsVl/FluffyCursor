@@ -2,7 +2,15 @@
   <id>smooth.caret</id>
   <name>Fluffy Cursor</name>
   <vendor>Fluffy Cursor contributors</vendor>
-  <description><![CDATA[Smooth and spring animated editor caret with configurable styles, subtle glow, trails and presets. Uses common IntelliJ Platform editor APIs and keeps the native caret available.]]></description>
+  <description><![CDATA[
+    <h2>Fluffy Cursor — an open-source animated caret</h2>
+    <p>A responsive editor caret with directional stretching, subtle neon glow, and one gentle forward/back landing recoil. Typing uses a faster, lighter effect. Ghost copies, particles, ripple, and landing pulse are disabled by default.</p>
+    <p>Open <b>Settings → Tools → Fluffy Cursor</b>, choose a preset, pick your color, and tune motion and glow. Higher spring stiffness feels quicker; a thin resting caret keeps text readable.</p>
+    <p>Built with <b>Kotlin, Swing, and common IntelliJ Platform APIs</b>. A clipped glass-pane overlay draws the caret; elapsed-time spring physics makes motion independent of fixed 60 Hz steps. Animation timers stop after settlement. The native caret is restored when the effect is disabled.</p>
+    <p><b>The JetBrains plugin does not modify IDE installation files.</b> The separate VS Code / Code OSS edition does modify desktop workbench interface files for full effects; it is an unsupported, reversible customization with its own installation guide.</p>
+    <p><b>Open source under the MIT license.</b> Inspect, modify, and contribute at <a href="https://github.com/GxnsVl/FluffyCursor">GitHub</a>. No telemetry or remote rendering scripts are included. Unaffiliated with JetBrains or Microsoft.</p>
+    <p>Supported platform range: 2024.3–2026.2. API compatibility was verified on IDEA and PyCharm 2026.2.3 and Rider 2026.2.3.1. Actual frame rate depends on IDE and system load; Linux/macOS visual behavior has not been manually verified.</p>
+  ]]></description>
   <depends>com.intellij.modules.platform</depends>
   <extensions defaultExtensionNs="com.intellij">
     <applicationService serviceImplementation="com.example.smoothcaret.settings.SmoothCaretSettings"/>

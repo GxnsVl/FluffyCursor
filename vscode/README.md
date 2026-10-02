@@ -2,10 +2,12 @@
 
 A desktop VS Code edition of Fluffy Cursor: a thin caret at rest, directional stretching during jumps, subtle neon glow, and one small forward/back landing recoil. Typing is faster and uses quarter-strength deformation. No ghost copies, particles, ripple, or repeated wobbling.
 
+**This is an open-source, MIT-licensed project for desktop VS Code and Code OSS. The current full-effect version modifies editor interface files.** Applying the effect adds a local script to the workbench, requires write access, and may trigger an installation-integrity warning. Installation and removal are explicit, reversible actions; editor updates may require reinstalling the effect.
+
 ## Install
 
-1. Download **[fluffy-cursor-1.0.1.vsix](https://github.com/GxnsVl/FluffyCursor/releases/download/vscode-v1.0.1/fluffy-cursor-1.0.1.vsix)**. The JetBrains `.zip` is a separate plugin and cannot be installed in VS Code.
-2. In VS Code, open **Extensions → ⋯ → Install from VSIX…**, select the file, and reload if prompted. Alternatively: `code --install-extension fluffy-cursor-1.0.1.vsix`.
+1. Download **[fluffy-cursor-1.1.0.vsix](https://github.com/GxnsVl/FluffyCursor/releases/download/vscode-v1.1.0/fluffy-cursor-1.1.0.vsix)**. The JetBrains `.zip` is a separate plugin and cannot be installed in VS Code.
+2. In VS Code, open **Extensions → ⋯ → Install from VSIX…**, select the file, and reload if prompted. Alternatively: `code --install-extension fluffy-cursor-1.1.0.vsix`.
 3. Disable any existing custom cursor scripts (Neovide, Jelly Cursor, etc.) using their original extension. Fluffy Cursor refuses to install over recognized conflicting renderers.
 4. Open the Command Palette (**Ctrl+Shift+P**, or **Cmd+Shift+P** on macOS), run **Fluffy Cursor: Install / Update Full Effect**, then choose **Reload Window**.
 
@@ -21,7 +23,18 @@ This is an unsupported workbench customization. VS Code may display an installat
 
 ## Customize
 
-Run **Fluffy Cursor: Open Settings** or search Settings for `Fluffy Cursor`. After changing settings, run **Install / Update Full Effect** again and reload.
+Run **Fluffy Cursor: Open Settings** to open the visual settings page:
+
+- Start with **Balanced**, **Calm**, **Neon**, or **Snappy**.
+- Choose a color with the picker, or enter a value such as `#FFFFFF`. Theme matching disables the custom color controls.
+- Tune width, responsiveness, stretch, and glow with sliders and plain-language hints.
+- Click inside the live preview or use **Try a jump** to see the result before applying it.
+- Click **Save & apply to editor**, then reload. **Save only** stores settings without modifying the workbench.
+- Use **Remove effect** before uninstalling, or **Advanced settings** for the editor's native settings page.
+
+The preview runs locally inside the settings page and does not alter the editor. Failed installation is reported separately from successful settings storage. Changing advanced settings still requires Install / Update Full Effect and a reload.
+
+![Fluffy Cursor visual settings with preview, color picker, and motion controls](images/settings.png)
 
 | Setting | Default | Purpose |
 | --- | --- | --- |

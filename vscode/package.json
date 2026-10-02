@@ -1,8 +1,8 @@
 {
   "name": "fluffy-cursor",
   "displayName": "Fluffy Cursor",
-  "description": "Directional elastic caret, subtle neon glow and a single landing recoil for desktop VS Code.",
-  "version": "1.0.1",
+  "description": "Open-source elastic caret with a visual settings panel. Full effects modify desktop VS Code / Code OSS interface files.",
+  "version": "1.1.0",
   "publisher": "GxnsVl",
   "license": "MIT",
   "engines": {
@@ -45,6 +45,7 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "test:browser": "node test/browser.js",
+    "test:settings": "node test/settings-browser.js",
     "package": "vsce package --no-dependencies"
   },
   "contributes": {

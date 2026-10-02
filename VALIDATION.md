@@ -1,4 +1,4 @@
-# Validation — Fluffy Cursor 1.1.1
+# Validation — Fluffy Cursor 1.2.0
 
 Validated on Windows, 2026-10-02.
 
@@ -27,6 +27,8 @@ No quantitative FPS/CPU benchmark was performed; these changes reduce identified
 
 Artifact: `build/distributions/fluffy-cursor-1.1.1.zip`.
 
+JetBrains 1.2.0 adds color-picker dialogs, readable animation/style names, section guidance, and a detailed open-source description. `test buildPlugin` passed with all 28 tests. Artifact: `build/distributions/fluffy-cursor-1.2.0.zip`. The API-verification results above refer to 1.1.1; 1.2.0 was built against the same 2024.3.6 SDK. The new Swing controls have not been manually checked in a live JetBrains IDE.
+
 ## VS Code edition — 1.0.0
 
 Validated on Windows, 2026-10-02. The VSIX is a separate artifact from the JetBrains plugin.
@@ -39,3 +41,13 @@ Validated on Windows, 2026-10-02. The VSIX is a separate artifact from the JetBr
 - Manual visual behavior in desktop VS Code, actual monitor refresh rate, and Linux/macOS runtime behavior remain untested. Full effects depend on internal workbench markup, require a writable installation, and may trigger VS Code's integrity warning. Reinstallation after IDE updates may be necessary.
 
 VS Code 1.0.1: multicarets and selection-count transitions now snap without stretch/recoil, preventing reused Monaco cursor nodes from generating crossing trails. Browser regression checks cover diverging positions and merging back to one caret.
+
+## VS Code / Code OSS — 1.1.0 visual settings
+
+- `npm test`: **14 tests, zero failures**, including explicit color validation and webview content-policy/disclosure checks.
+- Playwright settings checks passed: preset selection, white color persistence, theme-toggle control disabling, save/apply message separation, error presentation, local motion preview, and a narrow 480 px layout without horizontal overflow. Desktop and narrow screenshots were inspected.
+- Renderer browser regression checks passed, including multicaret count changes and native EditContext focus.
+- A VS Code 1.140.0 extension-host test with an isolated profile passed: activation, commands/defaults, a document opened, and the new visual settings tab opened.
+- Install/update now changes the renderer script URL revision to avoid loading a cached script with old settings. A repeated-install regression check confirms the URL changes while removal remains byte-for-byte reversible.
+- `vsce package --no-dependencies` creates `vscode/fluffy-cursor-1.1.0.vsix`, including local settings assets and a settings screenshot. No runtime dependencies, native binaries, or remote preview assets are required.
+- Code OSS on Linux and JetBrains visual controls have not been manually validated. Applying VS Code / Code OSS settings still requires workbench write access and a reload; the visual panel explicitly discloses that installation files are modified.

@@ -7,6 +7,7 @@ import java.awt.BorderLayout
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
+import java.awt.Color
 import javax.swing.*
 
 private class Binding(val read: (CaretOptions) -> Unit, val write: (CaretOptions) -> Unit)
@@ -23,8 +24,9 @@ class SmoothCaretSettingsComponent {
     init {
         val top = JPanel().apply { add(JLabel("Preset:")); add(preset) }
         panel.add(top, BorderLayout.NORTH); panel.add(tabs, BorderLayout.CENTER)
-        panel.add(JLabel("Native caret is restored when Fluffy Cursor is disabled."), BorderLayout.SOUTH)
+        panel.add(JLabel("<html><small>Open source · MIT license · Kotlin + IntelliJ Platform APIs<br>Changes apply when you click Apply. The native caret is restored when disabled.</small></html>"), BorderLayout.SOUTH)
         newSection("General")
+        help("Start with Neon for a brighter look, or Terminal for a quieter caret. Choose a color below, then click Apply.")
         check("Enable Fluffy Cursor", { enabled }, { enabled = it })
         check("Hide native caret (when supported)", { hideNativeCaret }, { hideNativeCaret = it })
         combo("Animation", AnimationMode.entries.toTypedArray(), { animationMode }, { animationMode = it })
@@ -36,6 +38,7 @@ class SmoothCaretSettingsComponent {
         check("Blink overlay", { blink }, { blink = it })
         integer("Blink interval (ms)", 100, 3000, 50, { blinkMs }, { blinkMs = it })
         newSection("Animation")
+        help("Higher stiffness feels sharper. Typing automatically uses a faster, lighter effect; landing recoil follows the movement direction.")
         number("Smooth interpolation factor", 0.01, 1.0, 0.01, { smoothing }, { smoothing = it })
         number("Animation speed", 0.1, 4.0, 0.1, { speed }, { speed = it })
         number("Spring stiffness", 0.01, 0.5, 0.01, { stiffness }, { stiffness = it })
@@ -45,6 +48,7 @@ class SmoothCaretSettingsComponent {
         check("Reduce animation for small movements", { reduceSmallMovements }, { reduceSmallMovements = it })
         check("Snap and clear trail while scrolling", { disableWhileScrolling }, { disableWhileScrolling = it })
         newSection("Trail and glow")
+        help("Glow adds a soft halo. Trail creates separate fading copies; the short directional stretch works without enabling trail.")
         check("Enable trail", { trail }, { trail = it })
         integer("Trail length (samples)", 1, 40, 1, { trailLength }, { trailLength = it })
         number("Trail opacity", 0.0, 1.0, 0.01, { trailOpacity }, { trailOpacity = it })
@@ -56,6 +60,7 @@ class SmoothCaretSettingsComponent {
         check("Use cursor color for glow", { glowUsesCursorColor }, { glowUsesCursorColor = it })
         text("Glow color (#RRGGBB)", { glowColor }, { glowColor = it })
         newSection("Optional effects")
+        help("Keep these off for a distraction-free editor. Presets leave all optional effects disabled.")
         check("Landing pulse", { landingPulse }, { landingPulse = it })
         check("Ripple", { ripple }, { ripple = it })
         check("Particles / sparks", { particles }, { particles = it })
@@ -65,6 +70,10 @@ class SmoothCaretSettingsComponent {
         }
     }
     private fun edited() { if (!loading) preset.selectedItem = "Custom" }
+    private fun help(message: String) {
+        val label = JLabel("<html><div style='width:380px'>$message</div></html>")
+        section.add(label, GridBagConstraints().apply { gridx = 0; gridy = row++; gridwidth = 2; weightx = 1.0; fill = GridBagConstraints.HORIZONTAL; insets = Insets(10, 10, 14, 10) })
+    }
     private fun newSection(name: String) {
         section = JPanel(GridBagLayout()); row = 0
         val wrapper = JPanel(BorderLayout()).apply { add(section, BorderLayout.NORTH) }
@@ -87,7 +96,15 @@ class SmoothCaretSettingsComponent {
         bindings.add(Binding({ c.value = it.get() }, { c.commitEdit(); it.set((c.value as Number).toInt()) }))
     }
     private fun text(label: String, get: CaretOptions.() -> String, set: CaretOptions.(String) -> Unit) {
-        val c = JTextField(12); addRow(label, c)
+        val c = JTextField(12)
+        val chooser = JButton("Choose color…")
+        val input = JPanel(BorderLayout(8, 0)).apply { add(c, BorderLayout.CENTER); add(chooser, BorderLayout.EAST) }
+        addRow(label, input)
+        c.toolTipText = "Use #RRGGBB, for example #FFFFFF for white. Custom caret color requires theme color to be off."
+        chooser.addActionListener {
+            val initial = try { Color.decode(c.text) } catch (_: NumberFormatException) { Color.CYAN }
+            JColorChooser.showDialog(panel, "Choose color", initial)?.let { c.text = "#%02X%02X%02X".format(it.red, it.green, it.blue) }
+        }
         c.document.addDocumentListener(object : javax.swing.event.DocumentListener {
             override fun insertUpdate(e: javax.swing.event.DocumentEvent) { edited() }
             override fun removeUpdate(e: javax.swing.event.DocumentEvent) { edited() }
@@ -97,6 +114,12 @@ class SmoothCaretSettingsComponent {
     }
     private fun <T> combo(label: String, values: Array<T>, get: CaretOptions.() -> T, set: CaretOptions.(T) -> Unit) {
         val c = JComboBox(values); addRow(label, c); c.addActionListener { edited() }
+        c.renderer = object : DefaultListCellRenderer() {
+            override fun getListCellRendererComponent(list: JList<*>?, value: Any?, index: Int, isSelected: Boolean, cellHasFocus: Boolean): java.awt.Component {
+                val display = if (value is Enum<*>) value.name.lowercase().replace('_', ' ').replaceFirstChar { it.titlecase() } else value
+                return super.getListCellRendererComponent(list, display, index, isSelected, cellHasFocus)
+            }
+        }
         bindings.add(Binding({ c.selectedItem = it.get() }, {
             @Suppress("UNCHECKED_CAST")
             it.set(c.selectedItem as T)

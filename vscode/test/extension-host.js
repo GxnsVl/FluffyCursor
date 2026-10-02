@@ -14,8 +14,16 @@ async function run() {
   assert.equal(settings.get('width'), 2); assert.equal(settings.get('color'), '#00E5FF');
   const document = await vscode.workspace.openTextDocument({ content: 'Fluffy Cursor extension host test\n', language: 'plaintext' });
   await vscode.window.showTextDocument(document);
+  await vscode.commands.executeCommand('fluffyCursor.settings');
+  await new Promise((resolve, reject) => {
+    const visible = () => vscode.window.tabGroups.all.flatMap(group => group.tabs).some(tab => tab.label === 'Fluffy Cursor');
+    if (visible()) { resolve(); return; }
+    const subscription = vscode.window.tabGroups.onDidChangeTabs(() => { if (visible()) { clearTimeout(timeout); subscription.dispose(); resolve(); } });
+    const timeout = setTimeout(() => { subscription.dispose(); reject(new Error('Settings tab did not open')); }, 5000);
+  });
+  assert.equal(vscode.window.tabGroups.all.flatMap(group => group.tabs).some(tab => tab.label === 'Fluffy Cursor'), true, 'visual settings panel opens');
   await fs.writeFile(path.join(extension.extensionPath, 'test-results/extension-host.json'), JSON.stringify({
-    vscode: vscode.version, activated: extension.isActive, commands: 3, defaults: true, documentOpened: true
+    vscode: vscode.version, activated: extension.isActive, commands: 3, defaults: true, documentOpened: true, visualSettingsOpened: true
   }, null, 2));
 }
 module.exports = { run };
