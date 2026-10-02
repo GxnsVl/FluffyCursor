@@ -4,7 +4,27 @@ Animated caret for JetBrains IDEs: responsive movement, directional stretching, 
 
 **VS Code edition:** download the separate `.vsix` and follow the [VS Code installation guide](vscode/README.md). Its full effect uses an opt-in, reversible desktop workbench customization.
 
-## Download and install
+## Install in VS Code
+
+1. Download **[fluffy-cursor-1.0.0.vsix](https://github.com/GxnsVl/FluffyCursor/releases/download/vscode-v1.0.0/fluffy-cursor-1.0.0.vsix)**. Use the `.vsix` package for VS Code.
+2. Open **Extensions** (**Ctrl+Shift+X**, or **Cmd+Shift+X** on macOS), click **⋯ → Install from VSIX…**, and select the downloaded file.
+3. Disable existing custom cursor effects such as **Neovide** or **Jelly Cursor** using the extension that installed them, then reload VS Code. Fluffy Cursor detects recognized conflicting effects and refuses to stack another renderer on top.
+4. Open the Command Palette (**Ctrl+Shift+P**, or **Cmd+Shift+P** on macOS), run **Fluffy Cursor: Install / Update Full Effect**, and choose **Reload Window**.
+5. To change color, width, glow, or spring settings, run **Fluffy Cursor: Open Settings**. After making changes, run **Install / Update Full Effect** again and reload.
+
+You can also install the package from a terminal:
+
+```sh
+code --install-extension fluffy-cursor-1.0.0.vsix
+```
+
+Then complete steps 3–4 to enable the full effect. Installing the VSIX alone registers the extension's commands and settings.
+
+Full stretching and inertia use a reversible modification of the desktop VS Code workbench. This requires a writable installation and may trigger an installation-integrity warning. After updating VS Code, run **Install / Update Full Effect** again if the effect disappears. Windows, Linux (including CachyOS), and macOS use the same VSIX; protected or read-only installations may prevent the full effect. Browser-based VS Code is unsupported.
+
+To remove it, run **Fluffy Cursor: Remove Full Effect**, reload, then uninstall the extension. See the [complete VS Code guide](vscode/README.md) for permissions, recovery, and settings.
+
+## Install in IntelliJ IDEA, PyCharm, or Rider
 
 1. Download **[fluffy-cursor-1.1.1.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/v1.1.1/fluffy-cursor-1.1.1.zip)** from the [Releases](https://github.com/GxnsVl/FluffyCursor/releases) page. Choose the plugin ZIP, not the Source code archive.
 2. In IntelliJ IDEA, PyCharm, or Rider, open **Settings → Plugins → ⚙ → Install Plugin from Disk…**.
