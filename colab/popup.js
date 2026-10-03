@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  const extensionApi = typeof browser !== 'undefined' ? browser : chrome;
   const model = window.FluffyCursorPhysics, keys = Object.keys(model.defaults), element = id => document.getElementById(id);
   let config = { ...model.defaults }, frame = 0, previous = 0, started = 0, landing = -1, moving = false, dx = 0, dy = 0;
   const state = model.state(15, 15), height = 18;
@@ -48,7 +49,7 @@
     event.preventDefault(); element('save').disabled=true;
     try {
       const settings=read();if(!/^#[\da-f]{6}$/i.test(settings.color))throw new Error('Choose a color such as #FFFFFF.');
-      await chrome.storage.local.set({fluffyCursor:model.options(settings)});
+      await extensionApi.storage.local.set({fluffyCursor:model.options(settings)});
       element('status').className='';element('status').textContent='Applied to open Colab tabs. No reload needed.';
     } catch(error) { element('status').className='error';element('status').textContent=error.message; }
     finally { element('save').disabled=false; }
@@ -57,5 +58,5 @@
   element('preview').addEventListener('keydown', event => {if(event.key==='Enter'||event.key===' '){event.preventDefault();jump(state.targetX<100?220:15,state.targetY<50?85:15);}});
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&frame){cancelAnimationFrame(frame);frame=0;}else if(!document.hidden)draw(performance.now());});
   element('save').disabled=true;
-  chrome.storage.local.get('fluffyCursor').then(result=>{load(result.fluffyCursor||{});element('save').disabled=false;element('status').textContent='Settings are stored locally and apply only to Colab.';}).catch(error=>{element('status').className='error';element('status').textContent='Could not read settings: '+error.message;});
+  extensionApi.storage.local.get('fluffyCursor').then(result=>{load(result.fluffyCursor||{});element('save').disabled=false;element('status').textContent='Settings are stored locally and apply only to Colab.';}).catch(error=>{element('status').className='error';element('status').textContent='Could not read settings: '+error.message;});
 })();

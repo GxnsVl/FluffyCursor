@@ -11,4 +11,5 @@ vscode/node_modules/
 vscode/*.vsix
 vscode/test-results/
 colab/dist/
+colab/dist-firefox/
 colab/test-results/

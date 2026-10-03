@@ -61,3 +61,12 @@ Validated on Windows, 2026-10-03.
 - `node colab/test.js` passed with the actual unpacked extension loaded in an isolated headless Edge profile. A local fixture intercepted a Colab-origin URL; checks covered automatic content-script injection, local settings, live white color changes, motion target alignment, ancestor notebook scrolling, cell switching, disable/enable restoration, and presets.
 - The popup and editor-fixture screenshots were visually inspected. The browser extension has not been tested editing a live authenticated Colab notebook, on Firefox/mobile, or on Linux/macOS. Colab's internal DOM may change.
 - Artifact: `fluffy-cursor-colab-1.0.0.zip`. No SDKs, browser executables, or development dependencies are included. The package changes page presentation locally and does not modify installation files or notebook content.
+
+## Google Colab Firefox edition — 1.0.0
+
+Validated on Windows, 2026-10-03.
+
+- Mozilla web-ext loaded the actual package as a temporary add-on in an isolated installed Firefox profile.
+- Firefox 155 (Playwright) passed Gecko renderer and popup integration checks: browser.* promise API contract, live white color updates, spring settlement, and native caret restoration on disable. Storage was simulated in this integration fixture; it is not a live Colab notebook test.
+- Edge unpacked-extension regression tests passed after the shared API adapter change.
+- Firefox manifest declares a stable add-on ID, desktop minimum 140, and no data collection. The XPI is unsigned and intended for temporary installation. Mozilla signing and store publication have not been performed.

@@ -11,7 +11,18 @@ An open-source, MIT-licensed browser extension for **Google Colab**. It adds dir
 5. Reload existing Google Colab tabs and click inside a code cell.
 6. Pin Fluffy Cursor to the browser toolbar. Click its icon to open settings.
 
-This package is installed locally; it is not published in the Chrome Web Store or Edge Add-ons. Windows, Linux/CachyOS, and macOS use the same files. Firefox and mobile browsers are not supported by this package.
+This package is installed locally; it is not published in the Chrome Web Store or Edge Add-ons. Windows, Linux/CachyOS, and macOS use the same files. Firefox uses the separate build below. Mobile browsers are not supported.
+
+## Install in Firefox (desktop 140 or newer)
+
+1. Download [fluffy-cursor-colab-firefox-1.0.0.xpi](https://github.com/GxnsVl/FluffyCursor/releases/download/colab-firefox-v1.0.0/fluffy-cursor-colab-firefox-1.0.0.xpi).
+2. Open `about:debugging#/runtime/this-firefox`.
+3. Click **Load Temporary Add-on**, then select the downloaded XPI.
+4. Reload Google Colab, click a code cell, and open Fluffy Cursor from the Extensions toolbar menu to customize it.
+
+**This release is unsigned. Temporary installation lasts until Firefox restarts.** Reload the XPI after a restart. A permanent installation in regular Firefox requires Mozilla signing; this project is not listed on Firefox Add-ons yet. Do not disable signature verification. See [Mozilla's temporary installation guide](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/) and [signing requirements](https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/).
+
+The Firefox manifest explicitly declares no data collection and requests storage plus access only to the Colab domain. Settings and effects match the Chrome/Edge edition. To remove the temporary extension, use **Remove** in `about:debugging` and reload Colab.
 
 ## Customize
 
@@ -33,8 +44,9 @@ From the repository root, with Node.js installed:
 
 ```sh
 node colab/build.js
+node colab/build.js --firefox
 ```
 
-Load `colab/dist` unpacked. The build copies the shared physics and adapts the shared VS Code renderer without modifying the desktop extension. It includes no Node.js dependencies or SDK files.
+Load `colab/dist` unpacked in Chrome/Edge, or select `colab/dist-firefox/manifest.json` as a temporary add-on in Firefox. The build copies the shared physics and adapts the shared VS Code renderer without modifying the desktop extension. It includes no Node.js dependencies or SDK files.
 
 [Source code](https://github.com/GxnsVl/FluffyCursor) · MIT license · Unaffiliated with Google, Microsoft, and JetBrains.

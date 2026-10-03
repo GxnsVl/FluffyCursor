@@ -8,7 +8,7 @@ Animated caret for JetBrains IDEs, VS Code / Code OSS, and Google Colab: respons
 
 **The current VS Code / Code OSS edition modifies editor interface files.** Full effects add a local script to the desktop workbench and require write access and a reload. This unsupported customization may trigger an integrity warning and need reinstallation after updates. The JetBrains edition uses public editor APIs and does not modify installation files.
 
-## Install in Google Colab (Chrome / Edge)
+## Install in Google Colab (Chrome / Edge / Firefox)
 
 1. Download **[fluffy-cursor-colab-1.0.0.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/colab-v1.0.0/fluffy-cursor-colab-1.0.0.zip)** and extract it to a folder you will keep.
 2. Open **chrome://extensions** or **edge://extensions**, enable **Developer mode**, and click **Load unpacked**.
@@ -16,7 +16,9 @@ Animated caret for JetBrains IDEs, VS Code / Code OSS, and Google Colab: respons
 4. Click a code cell to use the effect. Pin Fluffy Cursor to the toolbar and click its icon to configure presets, color, stretch, and glow.
 5. Click **Save & apply to Colab**. Settings update open Colab tabs immediately.
 
-This browser edition runs only on the Colab domain, stores settings locally, and does not modify notebook text or browser installation files. It is a local unpacked package, not a Chrome Web Store listing. To uninstall, remove it from Extensions and reload Colab tabs. See the [Colab guide](colab/README.md) for privacy, source, and limitations.
+For **Firefox 140+**, download the separate [Firefox XPI](https://github.com/GxnsVl/FluffyCursor/releases/download/colab-firefox-v1.0.0/fluffy-cursor-colab-firefox-1.0.0.xpi), open `about:debugging#/runtime/this-firefox`, and choose **Load Temporary Add-on**. Select the XPI and reload Colab. This unsigned build lasts until Firefox restarts; permanent installation requires Mozilla signing.
+
+This browser edition runs only on the Colab domain, stores settings locally, and does not modify notebook text or browser installation files. It is not listed in browser extension stores. To uninstall, remove it from Extensions and reload Colab tabs. See the [Colab guide](colab/README.md) for privacy, source, and limitations.
 
 ## Install in VS Code
 
