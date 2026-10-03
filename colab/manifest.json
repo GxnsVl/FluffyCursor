@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Fluffy Cursor for Google Colab",
+  "version": "1.0.0",
+  "description": "Open-source elastic caret with glow and live color/motion settings for Google Colab. Local visual overlay; no notebook changes.",
+  "minimum_chrome_version": "109",
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://colab.research.google.com/*"
+      ],
+      "js": [
+        "physics.js",
+        "renderer.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Fluffy Cursor settings",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": true
+  },
+  "homepage_url": "https://github.com/GxnsVl/FluffyCursor",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmMyGmUQ/5OwzrxwT5Snzo+oUwXpiuXC1LNoqKpYIkCw2ng0S6J0D4r6Fg4DnCaSYXY0n+jx+z5F4zIBmMSZCfooGqNfGlJEjiT8ecUIrNarDQ+MIqYC+y0zm6MfpeP7SfrcWjpE7ESH2H8QeQo4AWU9V2u0VVGaSG3Tpy5z/pyGsoX85MDdf8MsbScC7vQdLvfbJE0wKqi1ccOOyxyhPn+1dt7TRq3QsjHUkAPiH9v39TYayphYgQo/Z1uE1I5D/wQ8WU7XEAv/5dcWRDBADsuuSQF3ZmaDNNJL0QKWxLGcMy2GKTRdyipBj48DrGbkpJMQoe21/C33sVGIw3rOt8wIDAQAB"
+}

@@ -1,12 +1,22 @@
 # Fluffy Cursor
 
-Animated caret for JetBrains IDEs: responsive movement, directional stretching, subtle glow, and a single forward/back landing recoil. Typing uses a faster, lighter effect. Ghost copies are disabled by default.
+Animated caret for JetBrains IDEs, VS Code / Code OSS, and Google Colab: responsive movement, directional stretching, subtle glow, and a single forward/back landing recoil. Typing uses a faster, lighter effect. Ghost copies are disabled by default.
 
 **VS Code edition:** download the separate `.vsix` and follow the [VS Code installation guide](vscode/README.md). Its full effect uses an opt-in, reversible desktop workbench customization.
 
 **Open source · MIT license.** You can inspect, modify, redistribute, and contribute to this project. Source code, build instructions, and validation results are included in this repository.
 
 **The current VS Code / Code OSS edition modifies editor interface files.** Full effects add a local script to the desktop workbench and require write access and a reload. This unsupported customization may trigger an integrity warning and need reinstallation after updates. The JetBrains edition uses public editor APIs and does not modify installation files.
+
+## Install in Google Colab (Chrome / Edge)
+
+1. Download **[fluffy-cursor-colab-1.0.0.zip](https://github.com/GxnsVl/FluffyCursor/releases/download/colab-v1.0.0/fluffy-cursor-colab-1.0.0.zip)** and extract it to a folder you will keep.
+2. Open **chrome://extensions** or **edge://extensions**, enable **Developer mode**, and click **Load unpacked**.
+3. Select the extracted folder containing `manifest.json`, then reload your Colab tabs.
+4. Click a code cell to use the effect. Pin Fluffy Cursor to the toolbar and click its icon to configure presets, color, stretch, and glow.
+5. Click **Save & apply to Colab**. Settings update open Colab tabs immediately.
+
+This browser edition runs only on the Colab domain, stores settings locally, and does not modify notebook text or browser installation files. It is a local unpacked package, not a Chrome Web Store listing. To uninstall, remove it from Extensions and reload Colab tabs. See the [Colab guide](colab/README.md) for privacy, source, and limitations.
 
 ## Install in VS Code
 

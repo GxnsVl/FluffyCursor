@@ -10,3 +10,5 @@ local.properties
 vscode/node_modules/
 vscode/*.vsix
 vscode/test-results/
+colab/dist/
+colab/test-results/

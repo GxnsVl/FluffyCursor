@@ -51,3 +51,13 @@ VS Code 1.0.1: multicarets and selection-count transitions now snap without stre
 - Install/update now changes the renderer script URL revision to avoid loading a cached script with old settings. A repeated-install regression check confirms the URL changes while removal remains byte-for-byte reversible.
 - `vsce package --no-dependencies` creates `vscode/fluffy-cursor-1.1.0.vsix`, including local settings assets and a settings screenshot. No runtime dependencies, native binaries, or remote preview assets are required.
 - Code OSS on Linux and JetBrains visual controls have not been manually validated. Applying VS Code / Code OSS settings still requires workbench write access and a reload; the visual panel explicitly discloses that installation files are modified.
+
+## Google Colab browser edition — 1.0.0
+
+Validated on Windows, 2026-10-03.
+
+- Current Colab DOM was inspected through the public introductory notebook. Activating a code cell created the expected Monaco editor, input textarea, viewport, and native cursor elements in the main document. No cell content was modified or executed.
+- `node colab/build.js` generated a Manifest V3 package using the existing tested physics and adapted renderer. Its manifest is scoped to the Colab origin and requests only storage permission.
+- `node colab/test.js` passed with the actual unpacked extension loaded in an isolated headless Edge profile. A local fixture intercepted a Colab-origin URL; checks covered automatic content-script injection, local settings, live white color changes, motion target alignment, ancestor notebook scrolling, cell switching, disable/enable restoration, and presets.
+- The popup and editor-fixture screenshots were visually inspected. The browser extension has not been tested editing a live authenticated Colab notebook, on Firefox/mobile, or on Linux/macOS. Colab's internal DOM may change.
+- Artifact: `fluffy-cursor-colab-1.0.0.zip`. No SDKs, browser executables, or development dependencies are included. The package changes page presentation locally and does not modify installation files or notebook content.
